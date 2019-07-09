@@ -1,0 +1,45 @@
+#include <cmath>
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        if (x >= 0 && x < 10)
+            return true;
+        else if (x % 10 == 0 || x < 0)
+            return false;
+        
+        int num = x;
+        long i = 1;
+        
+        while (num >= 10){
+            num = num / 10;
+            i *= 10;
+        }
+        
+        long reverse = getReverse(x, i);
+        
+        if (reverse == x){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    long getReverse(int x, long multiplier){
+        int num = x;
+        
+        if ((num < 10 && num >= 0)||(multiplier == 1)){
+            return num;
+        }
+        else{
+            int digit = num % 10;
+            int next = (num - digit) / 10;
+            long reverse = digit * multiplier + getReverse(next, multiplier / 10);
+            return reverse;
+        }
+        
+    }
+            
+};
